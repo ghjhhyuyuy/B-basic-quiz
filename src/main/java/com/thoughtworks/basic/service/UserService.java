@@ -1,5 +1,6 @@
 package com.thoughtworks.basic.service;
 
+import com.thoughtworks.basic.domain.Education;
 import com.thoughtworks.basic.domain.User;
 import com.thoughtworks.basic.exception.UserException;
 
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
  */
 public class UserService {
     private final List<User> userList = new ArrayList<>();
+    private final List<List<Education>> educationList = new ArrayList<>();
+    private int length = 10;
     private int index = 0;
     public UserService(){
         index++;
@@ -22,10 +25,26 @@ public class UserService {
         user.setName("KAMIL");
         user.setId(index);
         userList.add(user);
+        List<Education> educations = new ArrayList<>();
+        Education education = new Education();
+        education.setDescription("Eos, explicabo, nam, tenetur et ab eius deserunt aspernatur ipsum ducimus quibusdam quis voluptatibus.");
+        education.setId(index);
+        education.setTitle("Secondary school specializing in artistic");
+        education.setYear(2005);
+        educations.add(education);
+        educationList.add(educations);
     }
     public User getUser(int id) throws UserException {
         try{
             return userList.stream().filter(user -> user.getId() == id).collect(Collectors.toList()).get(0);
+        }catch (Exception e){
+            throw new UserException("id错误");
+        }
+    }
+
+    public List<Education> getEducations(int id) throws UserException {
+        try{
+            return educationList.stream().filter(user -> user.get(0).getId() == id).collect(Collectors.toList()).get(0);
         }catch (Exception e){
             throw new UserException("id错误");
         }

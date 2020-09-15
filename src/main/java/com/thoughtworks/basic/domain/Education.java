@@ -1,6 +1,5 @@
 package com.thoughtworks.basic.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    @JsonIgnore
+public class Education {
     private long id;
-    private String name;
-    private long age;
-    private String avatar;
+    private String title;
+    private long year;
     private String description;
 }
