@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Education {
-    private long id;
+    private long userId;
     private String title;
     private long year;
     private String description;

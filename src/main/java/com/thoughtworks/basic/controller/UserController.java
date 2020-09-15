@@ -4,11 +4,10 @@ import com.thoughtworks.basic.domain.Education;
 import com.thoughtworks.basic.domain.User;
 import com.thoughtworks.basic.exception.UserException;
 import com.thoughtworks.basic.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -16,6 +15,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("users")
+@CrossOrigin
 public class UserController {
     private final UserService userService;
     public UserController(){
@@ -28,5 +28,9 @@ public class UserController {
     @GetMapping("{id}/educations")
     public List<Education> getEducations(@PathVariable int id) throws UserException {
         return userService.getEducations(id);
+    }
+    @PostMapping
+    public User addUser(@RequestBody @Valid User user) throws UserException {
+        return userService.addUser(user);
     }
 }
