@@ -18,19 +18,29 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
     private final UserService userService;
-    public UserController(){
+
+    public UserController() {
         this.userService = new UserService();
     }
+
     @GetMapping("{id}")
-    public User getUser(@PathVariable int id) throws UserException {
+    public User getUser(@PathVariable long id) throws UserException {
         return userService.getUser(id);
     }
+
     @GetMapping("{id}/educations")
-    public List<Education> getEducations(@PathVariable int id) throws UserException {
+    public List<Education> getEducations(@PathVariable long id) throws UserException {
         return userService.getEducations(id);
     }
+
     @PostMapping
-    public User addUser(@RequestBody @Valid User user) throws UserException {
+    public User addUser(@RequestBody @Valid User user) {
         return userService.addUser(user);
+    }
+
+    @PostMapping("{user_id}/educations")
+    public List<Education> addEducation(@PathVariable("user_id") long id, @RequestBody @Valid Education education) throws UserException {
+        education.setUserId(id);
+        return userService.addEducation(education);
     }
 }

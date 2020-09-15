@@ -15,7 +15,8 @@ public class UserService {
     private final List<User> userList = new ArrayList<>();
     private final List<List<Education>> educationList = new ArrayList<>();
     private int index = 0;
-    public UserService(){
+
+    public UserService() {
         index++;
         User user = new User();
         user.setAge(24);
@@ -33,18 +34,19 @@ public class UserService {
         educations.add(education);
         educationList.add(educations);
     }
-    public User getUser(int id) throws UserException {
-        try{
+
+    public User getUser(long id) throws UserException {
+        try {
             return userList.stream().filter(user -> user.getId() == id).collect(Collectors.toList()).get(0);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new UserException("id错误");
         }
     }
 
-    public List<Education> getEducations(int id) throws UserException {
-        try{
-            return educationList.stream().filter(user -> user.get(0).getUserId() == id).collect(Collectors.toList()).get(0);
-        }catch (Exception e){
+    public List<Education> getEducations(long id) throws UserException {
+        try {
+            return educationList.stream().filter(education -> education.get(0).getUserId() == id).collect(Collectors.toList()).get(0);
+        } catch (Exception e) {
             throw new UserException("id错误");
         }
     }
@@ -53,5 +55,17 @@ public class UserService {
         user.setId(++index);
         userList.add(user);
         return user;
+    }
+
+    public List<Education> addEducation(Education education) throws UserException {
+        try {
+            List<Education> educations = educationList.stream().filter(theEducation -> theEducation.get(0).getUserId() == education.getUserId()).collect(Collectors.toList()).get(0);
+            educations.add(education);
+            int index = educationList.indexOf(educations);
+            educationList.set(index, educations);
+            return educations;
+        } catch (Exception e) {
+            throw new UserException("添加错误，请检查用户id");
+        }
     }
 }
