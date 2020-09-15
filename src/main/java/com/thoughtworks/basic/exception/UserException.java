@@ -8,4 +8,8 @@ public class UserException extends Throwable {
     public UserException(String msg){
         this.meg = "[User error]" + msg;
     }
+
+    public String getMeg() {
+        return meg;
+    }
 }
