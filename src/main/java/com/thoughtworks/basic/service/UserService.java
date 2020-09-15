@@ -18,13 +18,11 @@ public class UserService {
 
     public UserService() {
         index++;
-        User user = new User();
-        user.setAge(24);
-        user.setAvatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0");
-        user.setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, non, dolorem, cumque distinctio magni quam expedita velit laborum sunt amet facere tempora ut fuga aliquam ad asperiores voluptatem dolorum! Quasi.");
-        user.setName("KAMIL");
-        user.setId(index);
-        userList.add(user);
+        initUser();
+        initEducation();
+    }
+
+    private void initEducation() {
         List<Education> educations = new ArrayList<>();
         Education education = new Education();
         education.setDescription("Eos, explicabo, nam, tenetur et ab eius deserunt aspernatur ipsum ducimus quibusdam quis voluptatibus.");
@@ -67,5 +65,15 @@ public class UserService {
         } catch (Exception e) {
             throw new UserException("添加错误，请检查用户id");
         }
+    }
+
+    public void initUser(){
+        User user = new User();
+        user.setAge(24);
+        user.setAvatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0");
+        user.setDescription("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, non, dolorem, cumque distinctio magni quam expedita velit laborum sunt amet facere tempora ut fuga aliquam ad asperiores voluptatem dolorum! Quasi.");
+        user.setName("KAMIL");
+        user.setId(index);
+        userList.add(user);
     }
 }
