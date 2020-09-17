@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+// GTB: 不需要下面这些注释，自动生成也不需要，该配置把它去掉
 /**
  * Created by wzw on 2020/9/15.
  */

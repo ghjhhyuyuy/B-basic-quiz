@@ -12,11 +12,13 @@ import java.util.stream.Collectors;
  * Created by wzw on 2020/9/15.
  */
 public class UserService {
+    // GTB: - 提取 Repository，具体可以跟小组同学交流一下
     private final List<User> userList = new ArrayList<>();
     private final List<List<Education>> educationList = new ArrayList<>();
     private int index = 0;
 
     public UserService() {
+        // GTB: 直接 index 从 1 开始就省得++了
         index++;
         initUser();
         initEducation();
@@ -34,6 +36,7 @@ public class UserService {
     }
 
     public User getUser(long id) throws UserException {
+        // GTB: - 不要用这种方式判断用户是否存在！再详细了解一下 Stream API
         try {
             return userList.stream().filter(user -> user.getId() == id).collect(Collectors.toList()).get(0);
         } catch (Exception e) {
@@ -42,6 +45,7 @@ public class UserService {
     }
 
     public List<Education> getEducations(long id) throws UserException {
+        // GTB: - 不要用这种方式判断用户是否存在！再详细了解一下 Stream API
         try {
             return educationList.stream().filter(education -> education.get(0).getUserId() == id).collect(Collectors.toList()).get(0);
         } catch (Exception e) {
@@ -50,6 +54,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
+        // GTB: - 生成 id 可以用 AtomicLong，避免一定的并发问题
         user.setId(++index);
         userList.add(user);
         return user;
